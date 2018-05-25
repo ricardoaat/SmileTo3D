@@ -1,44 +1,88 @@
 <html>
 
 <head>
-    <title>Awesome Smile 3D</title>
+    <title>Awesome SMILES 3D</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans|Roboto|Roboto+Mono|Work+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.4.85/css/materialdesignicons.min.css">
+
     <link rel="stylesheet" type="text/css" href="static/style.css">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Awesome SMILE 3D</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        <a class="navbar-brand" href="#">SMILES To 3D</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="http://github.com/ricardoaat">
+                        <i class="mdi mdi-github-circle" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.linkedin.com/in/ricardoarcila/">
+                        <i class="mdi mdi-linkedin-box" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="container">
-
+        <h1>Awesome molecule SMILES to 3D</h1>
         <div class="smile-form">
             <form>
                 <div class="form-group">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Place your SMILE</span>
+                            <span class="input-group-text">Place your SMILES</span>
                         </div>
                         <textarea id="smile-field" class="form-control" placeholder="For example, CCO, OCC and C(O)C" aria-label="With textarea">O=C(Oc1ccccc1C(=O)O)C</textarea>
                     </div>
+                    <small class="form-text text-muted">For example: Caffeine CN1C=NC2=C1C(=O)N(C(=O)N2C)C </small>
+                    <small class="form-text text-muted">For example: Dopamine C1=CC(=C(C=C1CCN)O)O.Cl</small>
                 </div>
-                <button id="smile-button" type="submit" class="btn btn-primary">GO!</button>
+                <button id="smile-button" type="submit" class="btn btn-primary">Visualize!</button>
             </form>
         </div>
+        <div id="error-alert" class="alert alert-danger mdi mdi-skull" role="alert"></div>
+    </div>
 
-        <div class="rendered-chem">
-            <div id="render-container">
+    <div class="container">
+        <div class="row">
+            <div id="render-container" class="col-lg-8">
                 <canvas id="renderer-canvas"></canvas>
             </div>
+            <div class="col-lg-4">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-ctab-tab" data-toggle="tab" href="#nav-ctab" role="tab" aria-controls="nav-ctab"
+                            aria-selected="true">CTAB</a>
+                        <a class="nav-item nav-link" id="nav-xyz-tab" data-toggle="tab" href="#nav-xyz" role="tab" aria-controls="nav-xyz" aria-selected="false">XYZ</a>
+                        <a class="nav-item nav-link" id="nav-smile-tab" data-toggle="tab" href="#nav-smile" role="tab" aria-controls="nav-smile"
+                            aria-selected="false">SMILE</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-ctab" role="tabpanel" aria-labelledby="nav-ctab-tab">
+                        <span class="molecule-tab-content" id="ctab-text"></span>
+                    </div>
+                    <div class="tab-pane fade" id="nav-xyz" role="tabpanel" aria-labelledby="nav-xyz-tab">
+                        <span class="molecule-tab-content" id="xyz-text"></span>
+                    </div>
+                    <div class="tab-pane fade" id="nav-smile" role="tabpanel" aria-labelledby="nav-smile-tab">
+                        <span class="molecule-tab-content" id="smiles-text"></span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="error-alert" class="alert alert-danger" role="alert"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
