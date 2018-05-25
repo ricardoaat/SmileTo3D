@@ -2,10 +2,10 @@
 var Speck = require('speck-renderer');
 
 
-window.onerror = function (e, url, line) {
+window.onerror = function (msg, url, lineNo, columnNo, e) {
     let error = document.getElementById("error-alert");
     error.style.display = "block";
-    error.innerHTML = " <strong>Ops!</strong> error at: Line #" + line + ": " + e;
+    error.innerHTML = " <strong>Ops!</strong> error at: Line #" + lineNo + ": " + msg;
 }
 
 window.onload = function () {
